@@ -1,24 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import TodoList from "./components/TodoList";
+import { TaskName } from "./types";
 
 function App() {
+  const list: { id: number; name: string; isCompleted: boolean }[] = [
+    {
+      id: 1,
+      name: "Task1",
+      isCompleted: false,
+    },
+    {
+      id: 2,
+      name: "Task2",
+      isCompleted: false,
+    },
+    {
+      id: 3,
+      name: "Task3",
+      isCompleted: false,
+    },
+  ];
+
+  const [todoList, setTodoList] = useState<TaskName[]>(list);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div>
+        <h1>To-Do List</h1>
+        <button>Add Item</button>
+      </div>
+      <TodoList todoList={todoList} setTodoList={setTodoList} />
     </div>
   );
 }
