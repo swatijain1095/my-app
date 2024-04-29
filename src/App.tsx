@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import TodoList from "./components/TodoList";
+import TodoList from "./components/TodoList/TodoList";
 import { TaskName } from "./types";
+import "./style.scss";
 
 function App() {
   const list: { id: number; name: string; isCompleted: boolean }[] = [
@@ -23,10 +24,12 @@ function App() {
 
   const [todoList, setTodoList] = useState<TaskName[]>(list);
   return (
-    <div>
+    <div className="container">
       <div>
         <h1>To-Do List</h1>
-        <button>Add Item</button>
+      </div>
+      <div className="Add-btn">
+        <button>Add New Item</button>
       </div>
       <TodoList todoList={todoList} setTodoList={setTodoList} />
     </div>
