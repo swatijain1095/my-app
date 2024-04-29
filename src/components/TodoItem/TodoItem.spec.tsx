@@ -12,6 +12,7 @@ describe("TodoItem =>", () => {
         isCompleted={false}
         handleDelete={handleDelete}
         handleSelect={() => {}}
+        handleEdit={() => {}}
       />
     );
     fireEvent.click(screen.getByTestId("delete-1"));
@@ -27,6 +28,7 @@ describe("TodoItem =>", () => {
         isCompleted={false}
         handleDelete={() => {}}
         handleSelect={handleSelect}
+        handleEdit={() => {}}
       />
     );
     fireEvent.click(screen.getByTestId("check-1"));

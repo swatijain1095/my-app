@@ -1,9 +1,11 @@
 import { TaskName } from "../../types";
 import "./style.scss";
+import { useState } from "react";
 
 export interface TodoItemProps extends TaskName {
   handleDelete: (id: number) => void;
   handleSelect: (id: number, check: boolean) => void;
+  handleEdit: (id: number, value: string) => void;
 }
 
 const TodoItem = ({
@@ -12,7 +14,22 @@ const TodoItem = ({
   isCompleted,
   handleDelete,
   handleSelect,
+  handleEdit,
 }: TodoItemProps) => {
+  const [value, setValue] = useState(name);
+  const [edit, setEdit] = useState(false);
+
+  const handleClickEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setEdit(true);
+  };
+
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    handleEdit(id, value);
+    setEdit(false);
+  };
+
   return (
     <div className="item">
       <form className="item__form">
@@ -25,10 +42,25 @@ const TodoItem = ({
               handleSelect(id, !isCompleted);
             }}
           />
-          <span className={isCompleted ? `item--check` : ""}>{name}</span>
+          <span className={isCompleted ? `item--check` : ""}>
+            {edit ? (
+              <input
+                value={value}
+                onChange={(e) => {
+                  setValue(e.target.value);
+                }}
+              />
+            ) : (
+              name
+            )}
+          </span>
         </div>
         <div className="item__btn">
-          <button>Edit</button>
+          {edit ? (
+            <button onClick={handleSubmit}>Submit</button>
+          ) : (
+            <button onClick={handleClickEdit}>Edit</button>
+          )}
           <button data-testid={`delete-${id}`} onClick={() => handleDelete(id)}>
             x
           </button>

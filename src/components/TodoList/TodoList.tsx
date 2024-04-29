@@ -22,6 +22,18 @@ const TodoList = ({ todoList, setTodoList }: TodoListProps) => {
     setTodoList(todoListCopy);
   };
 
+  const handleEdit = (id: number, value: string) => {
+    const todoListCopy = todoList.map((item) => {
+      if (id === item.id) {
+        return { ...item, name: value };
+      } else {
+        return item;
+      }
+    });
+    console.log(todoListCopy);
+    setTodoList(todoListCopy);
+  };
+
   return (
     <>
       <ul>
@@ -33,6 +45,7 @@ const TodoList = ({ todoList, setTodoList }: TodoListProps) => {
                 {...todoItem}
                 handleDelete={handleDelete}
                 handleSelect={handleSelect}
+                handleEdit={handleEdit}
               />
             ))}
       </ul>
