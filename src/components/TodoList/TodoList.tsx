@@ -30,7 +30,6 @@ const TodoList = ({ todoList, setTodoList }: TodoListProps) => {
         return item;
       }
     });
-    console.log(todoListCopy);
     setTodoList(todoListCopy);
   };
 
