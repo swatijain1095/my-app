@@ -25,6 +25,7 @@ const AddItem = ({ todoList, setTodoList }: TodoListProps) => {
   return (
     <div className="Add-btn">
       <input
+        data-testid={"add"}
         value={value}
         onChange={(e) => {
           setValue(e.target.value);
@@ -32,6 +33,7 @@ const AddItem = ({ todoList, setTodoList }: TodoListProps) => {
         placeholder="Add new to-do item here!"
       />
       <button
+        disabled={value === ""}
         onClick={() => {
           handleAdd(value);
         }}
