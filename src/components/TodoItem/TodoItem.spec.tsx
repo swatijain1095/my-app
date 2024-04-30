@@ -34,4 +34,49 @@ describe("TodoItem =>", () => {
     fireEvent.click(screen.getByTestId("check-1"));
     expect(handleSelect).toHaveBeenCalledWith(1, true);
   });
+
+  it("Should convert Edit button into Submit button", () => {
+    const handleEdit = jest.fn();
+    render(
+      <TodoItem
+        id={1}
+        name="Task1"
+        isCompleted={false}
+        handleDelete={() => {}}
+        handleSelect={() => {}}
+        handleEdit={handleEdit}
+      />
+    );
+    fireEvent.click(screen.getByText("Edit"));
+    function checkSubmitBtnDefined() {
+      screen.getByText("Submit");
+    }
+    expect(checkSubmitBtnDefined).not.toThrow();
+  });
+
+  it("Should be able to edit the taskname", () => {
+    const handleEdit = jest.fn();
+    render(
+      <TodoItem
+        id={1}
+        name="Task1"
+        isCompleted={false}
+        handleDelete={() => {}}
+        handleSelect={() => {}}
+        handleEdit={handleEdit}
+      />
+    );
+    fireEvent.click(screen.getByText("Edit"));
+    function checkSubmitBtnDefined() {
+      screen.getByText("Submit");
+    }
+    expect(checkSubmitBtnDefined).not.toThrow();
+
+    const inputLm = screen.getByTestId("input-1") as HTMLInputElement;
+    fireEvent.change(inputLm, { target: { value: "Task6" } });
+    expect(inputLm.value).toBe("Task6");
+
+    fireEvent.click(screen.getByText("Submit"));
+    expect(handleEdit).toHaveBeenCalledWith(1, "Task6");
+  });
 });

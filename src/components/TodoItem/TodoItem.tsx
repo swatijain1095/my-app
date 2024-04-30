@@ -32,7 +32,7 @@ const TodoItem = ({
 
   return (
     <div className="item">
-      <form className="item__form">
+      <form className="item__form" id="id">
         <div className="item__name">
           <input
             data-testid={`check-${id}`}
@@ -45,6 +45,7 @@ const TodoItem = ({
           <span className={isCompleted ? `item--check` : ""}>
             {edit ? (
               <input
+                data-testid={`input-${id}`}
                 value={value}
                 onChange={(e) => {
                   setValue(e.target.value);
